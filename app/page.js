@@ -25,23 +25,9 @@ export default function HomePage() {
   ];
 
   const categoryProducts = {
-    Mobile: [
-      { name: 'Mobile 1', image: '/products/mobile1.png' },
-      { name: 'Mobile 2', image: '/products/mobile2.png' },
-      { name: 'Mobile 3', image: '/products/mobile3.png' },
-      { name: 'Mobile 4', image: '/products/mobile4.png' },
-      { name: 'Mobile 5', image: '/products/mobile5.png' },
-    ],
-    Laptop: [
-      { name: 'Laptop 1', image: '/products/laptop1.png' },
-      { name: 'Laptop 2', image: '/products/laptop2.png' },
-      { name: 'Laptop 3', image: '/products/laptop3.png' },
-    ],
-    Fashion: [
-      { name: 'Fashion 1', image: '/products/fashion1.png' },
-      { name: 'Fashion 2', image: '/products/fashion2.png' },
-      { name: 'Fashion 3', image: '/products/fashion3.png' },
-    ],
+    Mobile: Array.from({ length: 30 }, (_, i) => ({ name: `Mobile ${i+1}`, image: '/products/placeholder.png' })),
+    Laptop: Array.from({ length: 30 }, (_, i) => ({ name: `Laptop ${i+1}`, image: '/products/placeholder.png' })),
+    Fashion: Array.from({ length: 30 }, (_, i) => ({ name: `Fashion ${i+1}`, image: '/products/placeholder.png' })),
   };
 
   const dealRef = useRef(null);
