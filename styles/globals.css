@@ -1,89 +1,113 @@
-body { margin:0; font-family: Arial,sans-serif; }
+/* Reset + base */
+* { box-sizing: border-box; }
+body { margin: 0; font-family: Arial, sans-serif; background: #f7f7f8; color: #202225; }
 
 /* Top Navbar */
 .top-navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0.8rem 1rem;
+  gap: .75rem;
+  padding: .8rem 1rem;
   background-color: #0d6efd;
-  color: white;
+  color: #fff;
   flex-wrap: wrap;
 }
-.brand { font-size: 1.3rem; font-weight: bold; }
-.tagline { font-size: 0.85rem; font-weight: normal; }
+.brand { font-size: 1.3rem; font-weight: 800; line-height: 1.1; }
+.tagline { font-size: .85rem; font-weight: 400; }
 
-.searchbar { flex: 1; text-align: center; margin: 0.5rem 0; }
-.searchbar input { width: 80%; max-width: 400px; padding: 0.5rem; font-size: 1rem; border-radius: 5px; border: none; }
-
-.top-right { display: flex; align-items: center; }
-.top-right button { margin-left: 0.5rem; background: none; border: none; color: white; font-size: 1rem; cursor: pointer; }
-.profile-icon { width: 32px; height: 32px; border-radius: 50%; margin-right: 0.5rem; }
-
-/* Categories Slider */
-.categories-slider {
-  display: flex;
-  overflow-x: auto;
-  gap: 1rem;
-  padding: 0.5rem 1rem;
-}
-.category-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  min-width: 100px;
-  background-color: #e9ecef;
-  padding: 0.5rem;
+.searchbar { flex: 1; text-align: center; }
+.searchbar input {
+  width: min(90%, 520px);
+  padding: .6rem .8rem;
+  font-size: 1rem;
   border-radius: 8px;
-  flex-shrink: 0;
-  cursor: pointer;
-  transition: transform 0.2s ease;
-}
-.category-item:hover { transform: scale(1.05); }
-.category-icon { width: 40px; height: 40px; margin-bottom: 0.3rem; }
-
-/* Deal of the Day Slider */
-.deal-slider { padding: 1rem; }
-.deal-slider h2 { margin-bottom: 0.5rem; }
-.deal-items { display: flex; overflow-x: auto; gap: 1rem; }
-.deal-item {
-  min-width: 220px;
-  height: 250px;
-  background-color: #f8f9fa;
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: bold;
-  font-size: 1.2rem;
-  flex-shrink: 0;
-}
-
-/* Category Products */
-.category-section { padding: 1rem; }
-.category-section h3 { margin-bottom: 0.5rem; }
-.category-products-grid {
-  display: flex;
-  overflow-x: auto;
-  gap: 1rem;
-}
-.product-collage-item {
-  min-width: 120px;
-  background-color: #e9ecef;
-  padding: 0.5rem;
-  border-radius: 8px;
-  text-align: center;
-  flex-shrink: 0;
-}
-.compare-btn {
-  margin-top: 0.3rem;
-  padding: 0.3rem 0.5rem;
-  background-color: #0d6efd;
-  color: white;
   border: none;
-  border-radius: 4px;
-  cursor: pointer;
+  outline: none;
 }
+
+.top-right { display: flex; align-items: center; gap: .5rem; }
+.profile-icon {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  background: #ffffff;
+  object-fit: cover;
+}
+.topbtn {
+  background: transparent; border: none; color: #fff; font-size: 1rem; cursor: pointer;
+}
+
+/* Horizontal sliders (scrollbars) */
+.categories-slider, .deal-items, .category-products-row {
+  display: flex;
+  overflow-x: auto;
+  gap: 1rem;
+  padding: .75rem 1rem;
+  scroll-snap-type: x proximity;
+}
+.categories-slider::-webkit-scrollbar,
+.deal-items::-webkit-scrollbar,
+.category-products-row::-webkit-scrollbar { height: 8px; }
+.categories-slider::-webkit-scrollbar-thumb,
+.deal-items::-webkit-scrollbar-thumb,
+.category-products-row::-webkit-scrollbar-thumb {
+  background: #d1d5db; border-radius: 999px;
+}
+
+/* Categories */
+.category-item {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  min-width: 100px; background: #fff; border-radius: 12px; padding: .6rem .5rem;
+  box-shadow: 0 1px 3px rgba(0,0,0,.08);
+  cursor: pointer; transition: transform .2s ease, box-shadow .2s ease;
+  scroll-snap-align: start;
+}
+.category-item:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,.12); }
+.category-icon { width: 44px; height: 44px; object-fit: contain; margin-bottom: .35rem; }
+.category-text { font-size: .9rem; font-weight: 600; text-align: center; }
+
+/* Deal of the Day (bigger card, one prominent at a time feel) */
+.deal-slider { padding: 1rem; }
+.deal-slider h2 { margin: .25rem 0 .75rem; }
+.deal-items { padding-top: .25rem; }
+.deal-item {
+  min-width: 280px; max-width: 320px; height: 320px;
+  background: #ffffff; border-radius: 14px; flex: 0 0 auto;
+  box-shadow: 0 2px 10px rgba(0,0,0,.08);
+  display: flex; flex-direction: column; overflow: hidden;
+  scroll-snap-align: center;
+}
+.deal-image { width: 100%; height: 70%; object-fit: contain; background: #f3f4f6; }
+.deal-info { padding: .6rem .8rem; display: flex; align-items: center; justify-content: space-between; }
+.deal-title { font-weight: 700; }
+
+/* Category rows (mobile shows 4-5 items visible; rest slide) */
+.category-section { padding: .5rem 1rem 1rem; }
+.category-section h3 { margin: .5rem 0 .25rem; }
+.category-products-row { padding-top: .5rem; }
+.product-card {
+  min-width: 130px; max-width: 160px;
+  background: #ffffff; border-radius: 12px; padding: .6rem; flex: 0 0 auto;
+  box-shadow: 0 1px 6px rgba(0,0,0,.06);
+  display: flex; flex-direction: column; align-items: center; gap: .4rem;
+}
+.product-image { width: 100%; height: 110px; object-fit: contain; background: #f3f4f6; border-radius: 8px; }
+.product-name { font-size: .9rem; font-weight: 600; text-align: center; min-height: 36px; }
+
+.compare-btn {
+  margin-top: .1rem; padding: .35rem .6rem;
+  background-color: #0d6efd; color: #fff; border: none; border-radius: 6px; cursor: pointer;
+  font-size: .85rem; font-weight: 700;
+}
+.compare-btn:hover { filter: brightness(.95); }
 
 /* Footer */
-.footer { background-color: #222; color: white; text-align: center; padding: 1rem 0; margin-top: 2rem; }
+.footer {
+  background-color: #111827; color: #e5e7eb; text-align: center; padding: 1rem 0; margin-top: 2rem;
+}
+
+/* Responsive tweaks */
+@media (min-width: 1024px) {
+  .product-image { height: 140px; }
+  .deal-item { min-width: 340px; max-width: 380px; height: 360px; }
+}
