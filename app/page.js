@@ -1,20 +1,18 @@
 'use client';
-
-import React, { useState } from 'react';
+import React from 'react';
 import '../styles/globals.css';
 
 export default function HomePage() {
   const categories = [
-    'Mobile', 'Laptop', 'Fashion', 'Electronic', 'Home & Furniture',
-    'TV & Appliance', 'Flight Booking', 'Beauty', 'Grocery', 'Kids', 'Sports'
+    'Mobile','Laptop','Fashion','Electronic','Home & Furniture',
+    'TV & Appliance','Flight Booking','Beauty','Grocery','Kids','Sports'
   ];
 
-  const dealOfTheDay = Array.from({ length: 20 }, (_, i) => `Deal ${i + 1}`);
+  const dealOfTheDay = Array.from({ length: 10 }, (_, i) => `Deal ${i + 1}`);
 
-  // Example: category-wise products stored in object arrays
   const categoryProducts = {
-    Mobile: Array.from({ length: 30 }, (_, i) => `Mobile ${i + 1}`),
-    Laptop: Array.from({ length: 25 }, (_, i) => `Laptop ${i + 1}`),
+    Mobile: Array.from({ length: 20 }, (_, i) => `Mobile ${i + 1}`),
+    Laptop: Array.from({ length: 20 }, (_, i) => `Laptop ${i + 1}`),
     Fashion: Array.from({ length: 20 }, (_, i) => `Fashion ${i + 1}`),
     Electronic: Array.from({ length: 20 }, (_, i) => `Electronics ${i + 1}`),
     'Home & Furniture': Array.from({ length: 15 }, (_, i) => `Home ${i + 1}`),
@@ -38,8 +36,8 @@ export default function HomePage() {
           <input type="text" placeholder="Search products..." />
         </div>
         <div className="top-right">
+          <img src="/icons/profile.svg" alt="Profile" className="profile-icon" />
           <button>Login</button>
-          <button>Profile</button>
           <button>⋮</button>
         </div>
       </div>
@@ -47,7 +45,10 @@ export default function HomePage() {
       {/* Categories Slider */}
       <div className="categories-slider">
         {categories.map((cat, index) => (
-          <div key={index} className="category-item">{cat}</div>
+          <div key={index} className="category-item">
+            <img src={`/icons/${cat}.png`} alt={cat} className="category-icon" />
+            <span>{cat}</span>
+          </div>
         ))}
       </div>
 
@@ -76,10 +77,7 @@ export default function HomePage() {
         </div>
       ))}
 
-      {/* Footer */}
-      <footer className="footer">
-        © 2025 DealHunt. All rights reserved.
-      </footer>
+      <footer className="footer">© 2025 DealHunt. All rights reserved.</footer>
     </div>
   );
 }
