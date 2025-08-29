@@ -15,7 +15,6 @@ body { margin: 0; font-family: Arial, sans-serif; background: #f7f7f8; color: #2
 }
 .brand { font-size: 1.3rem; font-weight: 800; line-height: 1.1; }
 .tagline { font-size: .85rem; font-weight: 400; }
-
 .searchbar { flex: 1; text-align: center; }
 .searchbar input {
   width: min(90%, 520px);
@@ -25,28 +24,17 @@ body { margin: 0; font-family: Arial, sans-serif; background: #f7f7f8; color: #2
   border: none;
   outline: none;
 }
-
 .top-right { display: flex; align-items: center; gap: .5rem; }
-.profile-icon {
-  width: 36px; height: 36px;
-  border-radius: 50%;
-  background: #ffffff;
-  object-fit: cover;
-}
-.topbtn {
-  background: transparent; border: none; color: #fff; font-size: 1rem; cursor: pointer;
-}
+.profile-icon { width: 36px; height: 36px; border-radius: 50%; background: #ffffff; object-fit: cover; }
+.topbtn { background: transparent; border: none; color: #fff; font-size: 1rem; cursor: pointer; }
 
 /* Sliders / horizontal rows */
 .categories-slider, .deal-items, .category-products-row {
   display: flex;
-  overflow-x: auto;
   gap: 1rem;
   padding: .75rem 1rem;
   scroll-snap-type: x proximity;
 }
-
-/* Custom scrollbar color (optional) */
 .categories-slider::-webkit-scrollbar,
 .deal-items::-webkit-scrollbar,
 .category-products-row::-webkit-scrollbar { height: 8px; }
@@ -71,7 +59,12 @@ body { margin: 0; font-family: Arial, sans-serif; background: #f7f7f8; color: #2
 /* Deal of the Day */
 .deal-slider { padding: 1rem; }
 .deal-slider h2 { margin: .25rem 0 .75rem; }
-.deal-items { padding-top: .25rem; align-items: center; }
+.deal-items {
+  display: flex;
+  overflow-x: hidden; /* auto-scroll hide */
+  scroll-snap-type: x mandatory;
+  gap: 1rem;
+}
 .deal-item {
   min-width: 280px; max-width: 320px; height: 320px;
   background: #ffffff; border-radius: 14px; flex: 0 0 auto;
@@ -79,7 +72,7 @@ body { margin: 0; font-family: Arial, sans-serif; background: #f7f7f8; color: #2
   display: flex; flex-direction: column; overflow: hidden;
   scroll-snap-align: center;
 }
-.deal-item.deal-main { transform: scale(1.03); }
+.deal-item.deal-main { transform: scale(1.03); min-width: 100%; }
 .deal-image { width: 100%; height: 70%; object-fit: contain; background: #f3f4f6; }
 .deal-info { padding: .6rem .8rem; display: flex; align-items: center; justify-content: space-between; }
 .deal-title { font-weight: 700; }
@@ -88,7 +81,14 @@ body { margin: 0; font-family: Arial, sans-serif; background: #f7f7f8; color: #2
 .category-section { padding: .5rem 1rem 1rem; }
 .category-header { display:flex; justify-content:space-between; align-items:center; }
 .view-all-link { font-size: .9rem; color: #0d6efd; text-decoration:none; margin-left:.5rem; }
-.category-products-row { padding-top: .5rem; align-items: stretch; }
+.category-products-row {
+  display: flex;
+  overflow-x: scroll; /* horizontal scroll */
+  padding-top: .5rem; 
+  align-items: stretch;
+  gap: 1rem;
+}
+.category-products-row::-webkit-scrollbar { display: none; } /* hide scrollbar */
 
 /* Product card for horizontal rows */
 .product-card {
@@ -100,7 +100,6 @@ body { margin: 0; font-family: Arial, sans-serif; background: #f7f7f8; color: #2
 }
 .product-image { width: 100%; height: 110px; object-fit: contain; background: #f3f4f6; border-radius: 8px; }
 .product-name { font-size: .9rem; font-weight: 600; text-align: center; min-height: 36px; }
-
 .compare-btn {
   margin-top: .1rem; padding: .35rem .6rem;
   background-color: #0d6efd; color: #fff; border: none; border-radius: 6px; cursor: pointer;
