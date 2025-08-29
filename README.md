@@ -1,16 +1,29 @@
-## Hi there 👋
+# DealHunt24x7
 
-<!--
-**dealhunt-24x7/Dealhunt-24x7** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
+**Daily Deals & Price Comparison Platform**  
+Professional affiliate deals website with trending products, flash deals, referral & coin system, and multi-platform price comparison. Built with **Next.js + TailwindCSS + Firebase**, optimized for **mobile & SEO**.
 
-Here are some ideas to get you started:
+---
 
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
+## 🚀 Features
+
+### Core Features
+- Daily updated **deals & trending products**
+- **Multi-platform price comparison** (Amazon, Flipkart, Meesho)
+- User **Registration/Login** (Email & Google Auth)
+- **Referral & Coins system**: earn coins, redeem for coupons
+- **Reviews & Ratings** for products
+- **Responsive design** for mobile & desktop
+- Infinite scroll / Load More for products
+- Sidebar menu with **Categories, Filters, Settings**
+- Flash deals with **Countdown timer**
+
+### Advanced Features (Phase 2+)
+- **Image Search**: upload product image → find similar items
+- **Leaderboard**: top referrers & reviewers
+- Browser **Push Notifications** & Telegram alerts
+- SEO optimized blog posts for organic traffic
+
+---
+
+## 📁 File Structure (Starter)
