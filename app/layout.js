@@ -1,19 +1,17 @@
-import '../styles/globals.css';
-import Header from '../components/Header';
-import Footer from '../components/Footer';
+import "./globals.css";
+import Navbar from "../components/Navbar";
 
 export const metadata = {
-  title: 'Dealhunt',
-  description: 'Best deals aggregator with product comparison',
+  title: "DealHunt",
+  description: "Daily deals & price comparison platform",
 };
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body>
-        <Header />
-        <main>{children}</main>
-        <Footer />
+      <body className="bg-gray-50">
+        <Navbar />
+        <main className="p-6">{children}</main>
       </body>
     </html>
   );
