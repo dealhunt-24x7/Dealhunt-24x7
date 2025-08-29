@@ -1,8 +1,9 @@
 'use client';
-import React, { useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import '../styles/globals.css';
 
 export default function HomePage() {
+  // Categories
   const categories = [
     { name: 'Mobile', icon: 'Mobile.png' },
     { name: 'Laptop', icon: 'Laptop.png' },
@@ -17,6 +18,7 @@ export default function HomePage() {
     { name: 'Sports', icon: 'Sports.png' },
   ];
 
+  // Deal of the Day
   const dealOfTheDay = [
     { title: 'Deal 1', image: '/products/deal1.png' },
     { title: 'Deal 2', image: '/products/deal2.png' },
@@ -24,35 +26,40 @@ export default function HomePage() {
     { title: 'Deal 4', image: '/products/deal4.png' },
   ];
 
-  const categoryProducts = {
-    Mobile: Array.from({ length: 30 }, (_, i) => ({ name: `Mobile ${i+1}`, image: '/products/placeholder.png' })),
-    Laptop: Array.from({ length: 30 }, (_, i) => ({ name: `Laptop ${i+1}`, image: '/products/placeholder.png' })),
-    Fashion: Array.from({ length: 30 }, (_, i) => ({ name: `Fashion ${i+1}`, image: '/products/placeholder.png' })),
-  };
-
   const dealRef = useRef(null);
-
-  // Auto scroll Deal of the Day
   useEffect(() => {
-    const scrollDeals = () => {
+    const scrollInterval = setInterval(() => {
       if (dealRef.current) {
-        const scrollWidth = dealRef.current.scrollWidth;
-        const visibleWidth = dealRef.current.offsetWidth;
-        const scrollLeft = dealRef.current.scrollLeft;
-        if (scrollLeft + visibleWidth >= scrollWidth) {
-          dealRef.current.scrollTo({ left: 0, behavior: 'smooth' });
-        } else {
-          dealRef.current.scrollBy({ left: visibleWidth, behavior: 'smooth' });
-        }
+        const firstChild = dealRef.current.children[0];
+        dealRef.current.appendChild(firstChild);
       }
-    };
-    const interval = setInterval(scrollDeals, 3000);
-    return () => clearInterval(interval);
+    }, 3000); // 3 sec auto scroll
+    return () => clearInterval(scrollInterval);
   }, []);
+
+  // Category-wise products
+  const categoryProducts = {
+    Mobile: Array.from({ length: 30 }, (_, i) => ({
+      name: `Mobile ${i + 1}`,
+      image: `/products/mobile${(i % 6) + 1}.png`,
+    })),
+    Laptop: Array.from({ length: 25 }, (_, i) => ({
+      name: `Laptop ${i + 1}`,
+      image: `/products/laptop${(i % 4) + 1}.png`,
+    })),
+    Fashion: Array.from({ length: 25 }, (_, i) => ({
+      name: `Fashion ${i + 1}`,
+      image: `/products/fashion${(i % 4) + 1}.png`,
+    })),
+    Electronic: Array.from({ length: 25 }, (_, i) => ({
+      name: `Gadget ${i + 1}`,
+      image: `/products/electronic${(i % 4) + 1}.png`,
+    })),
+  };
 
   return (
     <div className="homepage">
-      {/* Top Navbar */}
+      {/* Navbar */}
       <div className="top-navbar">
         <div className="brand">
           DealHunt<br />
@@ -70,7 +77,7 @@ export default function HomePage() {
         </div>
       </div>
 
-      {/* Categories Slider */}
+      {/* Categories */}
       <div className="categories-slider">
         {categories.map((cat, idx) => (
           <div key={idx} className="category-item">
@@ -105,13 +112,13 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Category-wise products */}
+      {/* Category Products */}
       {Object.keys(categoryProducts).map((cat, idx) => (
         <section key={idx} className="category-section">
           <h3>{cat}</h3>
           <div className="category-products-row">
-            {categoryProducts[cat].map((prod, idp) => (
-              <div key={idp} className="product-card">
+            {categoryProducts[cat].map((prod, idx2) => (
+              <div key={idx2} className="product-card">
                 <img
                   src={prod.image || '/products/placeholder.png'}
                   alt={prod.name}
