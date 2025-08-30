@@ -1,152 +1,50 @@
-'use client';
-import React, { useEffect, useRef, useState } from 'react';
-import '../styles/globals.css';
+/* Reset + base */
+* { box-sizing: border-box; margin:0; padding:0; }
+body { font-family: Arial,sans-serif; background:#f7f7f8; color:#202225; }
 
-export default function HomePage() {
-  // Categories + icon
-  const categories = [
-    { name: 'Mobile', icon: 'Mobile.png' },
-    { name: 'Laptop', icon: 'Laptop.png' },
-    { name: 'Fashion', icon: 'Fashion.png' },
-    { name: 'Electronic', icon: 'Electronic.png' },
-    { name: 'Home & Furniture', icon: 'HomeFurniture.png' },
-    { name: 'TV & Appliance', icon: 'TVAppliance.png' },
-    { name: 'Flight Booking', icon: 'FlightBooking.png' },
-    { name: 'Beauty', icon: 'Beauty.png' },
-    { name: 'Grocery', icon: 'Grocery.png' },
-    { name: 'Kids', icon: 'Kids.png' },
-    { name: 'Sports', icon: 'Sports.png' },
-  ];
-
-  // Deal of the day
-  const dealOfTheDay = [
-    { title: 'Deal 1', image: '/products/deal1.png' },
-    { title: 'Deal 2', image: '/products/deal2.png' },
-    { title: 'Deal 3', image: '/products/deal3.png' },
-    { title: 'Deal 4', image: '/products/deal4.png' },
-  ];
-
-  // Category-wise products (25 placeholders each)
-  const categoryProducts = {};
-  categories.forEach(cat => {
-    categoryProducts[cat.name] = Array.from({ length: 25 }, (_, i) => ({
-      name: `${cat.name} ${i + 1}`,
-      image: '/products/placeholder.png',
-    }));
-  });
-
-  // Deal of the day auto scroll (infinite loop)
-  const dealRef = useRef(null);
-  const [currentIndex, setCurrentIndex] = useState(0);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      if (dealRef.current) {
-        let nextIndex = currentIndex + 1;
-        if (nextIndex >= dealOfTheDay.length) nextIndex = 0;
-        setCurrentIndex(nextIndex);
-        dealRef.current.scrollTo({
-          left: nextIndex * dealRef.current.offsetWidth,
-          behavior: 'smooth',
-        });
-      }
-    }, 3000);
-    return () => clearInterval(interval);
-  }, [currentIndex]);
-
-  // 3 Dots menu toggle
-  const [menuOpen, setMenuOpen] = useState(false);
-  const menuOptions = [
-    'Account', 'Coin zone', 'All categories', 'Filters', 'Language',
-    'Offers', 'My orders', 'My cart', 'My wishlist', 'Notifications',
-    'Help center', 'Return & exchange', 'Wallet', 'Referral & earn'
-  ];
-
-  return (
-    <div className="homepage">
-      {/* Top Navbar */}
-      <div className="top-navbar">
-        <div className="brand">
-          <span className="brand-name">DealHunt</span><br/>
-          <span className="tagline">Find the best deals!</span>
-        </div>
-
-        <div className="searchbar">
-          <input type="text" placeholder="Search products..." />
-        </div>
-
-        <div className="top-right">
-          <img src="/icons/avatar.png" alt="Profile" className="profile-icon" />
-          <button className="topbtn">Login</button>
-          <button className="topbtn" onClick={() => setMenuOpen(!menuOpen)}>⋮</button>
-          {menuOpen && (
-            <div className="dots-menu">
-              {menuOptions.map((opt, idx) => (
-                <div key={idx} className="dots-menu-item">{opt}</div>
-              ))}
-            </div>
-          )}
-        </div>
-      </div>
-
-      {/* Categories Slider */}
-      <div className="categories-slider">
-        {categories.map((cat, index) => (
-          <div key={index} className="category-item">
-            <img
-              src={`/icons/${cat.icon}`}
-              alt={cat.name}
-              className="category-icon"
-              onError={(e)=>e.currentTarget.src='/icons/default-category.png'}
-            />
-            <span className="category-text">{cat.name}</span>
-          </div>
-        ))}
-      </div>
-
-      {/* Deal of the Day */}
-      <section className="deal-slider">
-        <h2>Deal of the Day</h2>
-        <div className="deal-items" ref={dealRef}>
-          {dealOfTheDay.map((deal, idx)=>(
-            <div key={idx} className="deal-item">
-              <img src={deal.image} alt={deal.title} className="deal-image" />
-              <div className="deal-info">
-                <p className="deal-title">{deal.title}</p>
-                <button className="compare-btn">Compare</button>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Category-wise products */}
-      {Object.keys(categoryProducts).map((cat, index)=>(
-        <section key={index} className="category-section">
-          <h3>{cat}</h3>
-          <div className="category-products-row">
-            {categoryProducts[cat].map((prod, idx)=>(
-              <div key={idx} className="product-card">
-                <img src={prod.image} alt={prod.name} className="product-image"/>
-                <p className="product-name">{prod.name}</p>
-                <button className="compare-btn">Compare</button>
-              </div>
-            ))}
-          </div>
-        </section>
-      ))}
-
-      {/* Floating Cart Button */}
-      <div className="floating-cart">🛒</div>
-
-      {/* Footer */}
-      <footer className="footer">
-        <div>About DealHunt</div>
-        <div>Contact us</div>
-        <div>Help center</div>
-        <div>Mail us</div>
-        <div>Social: Instagram | Facebook | X</div>
-      </footer>
-    </div>
-  );
+/* Top Navbar */
+.top-navbar {
+  display: flex; justify-content: space-between; align-items: center; gap:.75rem;
+  padding:.6rem 1rem; background-color:#0d6efd; color:#fff; flex-wrap: wrap;
 }
+.brand-name { font-size:1.3rem; font-weight:800; color:#ffd700; } /* colorful */
+.tagline { font-size:0.85rem; color:#fff; font-style:italic; }
+
+.searchbar { flex:1; text-align:center; }
+.searchbar input {
+  width:min(90%, 520px); padding:.5rem .7rem; font-size:1rem; border-radius:8px; border:none; outline:none;
+}
+
+.top-right { display:flex; align-items:center; gap:.5rem; position:relative; }
+.profile-icon { width:32px; height:32px; border-radius:50%; object-fit:cover; }
+.topbtn { background:transparent; border:none; color:#fff; font-size:1.2rem; cursor:pointer; }
+
+/* 3 Dots Side Panel */
+.dots-panel {
+  position: fixed; top:0; right:-250px; width:250px; height:100vh; background:#fff; box-shadow:-2px 0 8px rgba(0,0,0,.2);
+  transition: right .3s ease; z-index:1000; padding:1rem;
+  display:flex; flex-direction:column; gap:.5rem;
+}
+.dots-panel.open { right:0; }
+.dots-panel .close-btn {
+  align-self:flex-end; font-size:1.5rem; background:none; border:none; cursor:pointer;
+}
+.dots-menu-item { padding:.6rem .8rem; border-bottom:1px solid #eee; cursor:pointer; }
+
+/* Categories */
+.categories-slider {
+  display:flex; overflow-x:auto; gap:1rem; padding:.75rem 1rem; scroll-snap-type:x proximity;
+}
+.category-item {
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  min-width:100px; background:#fff; border-radius:12px; padding:.5rem; box-shadow:0 1px 3px rgba(0,0,0,.08);
+  cursor:pointer; transition:transform .2s ease, box-shadow .2s ease; scroll-snap-align:start;
+}
+.category-item:hover { transform:translateY(-2px); box-shadow:0 4px 12px rgba(0,0,0,.12); }
+.category-icon { width:44px; height:44px; object-fit:contain; margin-bottom:.3rem; }
+.category-text { font-size:.9rem; font-weight:600; text-align:center; }
+
+/* Deal of the Day */
+.deal-slider { padding:1rem; }
+.deal-slider h2 { margin:.25rem 0 .75rem; }
+.deal-items { display:flex; overflow-x:hidden;
