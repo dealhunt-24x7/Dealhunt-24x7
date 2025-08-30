@@ -1,35 +1,69 @@
 "use client";
 
 import { useState } from "react";
-import Sidebar from "./Sidebar";
 
 export default function Navbar() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
+  // Menu options
+  const menuOptions = [
+    "Account", "Coin zone", "All categories", "Filters", "Language",
+    "Offers", "My orders", "My cart", "My wishlist", "Notifications",
+    "Help center", "Return & exchange", "Wallet", "Referral & earn"
+  ];
+
   return (
-    <nav className="flex items-center justify-between px-6 py-4 bg-blue-600 text-white shadow-md relative">
-      {/* Left - Sidebar Toggle (Mobile) */}
-      <button
-        onClick={() => setSidebarOpen(true)}
-        className="md:hidden p-2 bg-blue-500 rounded-lg flex flex-col justify-between h-5"
-      >
-        <span className="block w-5 h-[2px] bg-white"></span>
-        <span className="block w-5 h-[2px] bg-white"></span>
-        <span className="block w-5 h-[2px] bg-white"></span>
-      </button>
+    <>
+      <nav className="top-navbar">
+        {/* Brand */}
+        <div className="brand">
+          <span className="brand-name">DealHunt</span><br/>
+          <span className="tagline">Find the best deals!</span>
+        </div>
 
-      {/* Center - Brand */}
-      <h1 className="text-2xl font-bold">DealHunt</h1>
+        {/* Search */}
+        <div className="searchbar">
+          <input type="text" placeholder="Search products..." />
+        </div>
 
-      {/* Right - Nav Links (Desktop) */}
-      <div className="hidden md:flex space-x-6">
-        <a href="/" className="hover:underline">Home</a>
-        <a href="/products" className="hover:underline">Products</a>
-        <a href="/about" className="hover:underline">About</a>
-      </div>
+        {/* Right side */}
+        <div className="top-right">
+          <img
+            src="/icons/avatar.png"
+            alt="Profile"
+            className="profile-icon"
+            onClick={() => setSidebarOpen(!sidebarOpen)}
+          />
 
-      {/* Sidebar */}
-      <Sidebar open={sidebarOpen} setOpen={setSidebarOpen} />
-    </nav>
+          {/* Hamburger for mobile */}
+          <div
+            className="hamburger"
+            onClick={() => setSidebarOpen(!sidebarOpen)}
+          >
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        </div>
+      </nav>
+
+      {/* Side Menu Overlay */}
+      {sidebarOpen && (
+        <div
+          className="side-menu-overlay"
+          onClick={() => setSidebarOpen(false)}
+        >
+          <div
+            className="side-menu"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <h3>Menu</h3>
+            {menuOptions.map((opt, idx) => (
+              <div key={idx} className="side-menu-item">{opt}</div>
+            ))}
+          </div>
+        </div>
+      )}
+    </>
   );
 }
