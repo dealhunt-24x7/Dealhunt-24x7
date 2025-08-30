@@ -26,22 +26,16 @@ export default function HomePage() {
     { title: 'Deal 4', image: '/products/deal4.png' },
   ];
 
-  // Category-wise products
-  const categoryProducts = {
-    Mobile: Array.from({length: 25}, (_, i) => ({ name: `Mobile ${i+1}`, image: '/products/placeholder.png' })),
-    Laptop: Array.from({length: 25}, (_, i) => ({ name: `Laptop ${i+1}`, image: '/products/placeholder.png' })),
-    Fashion: Array.from({length: 25}, (_, i) => ({ name: `Fashion ${i+1}`, image: '/products/placeholder.png' })),
-    Electronic: Array.from({length: 25}, (_, i) => ({ name: `Gadget ${i+1}`, image: '/products/placeholder.png' })),
-    'Home & Furniture': Array.from({length: 25}, (_, i) => ({ name: `Item ${i+1}`, image: '/products/placeholder.png' })),
-    'TV & Appliance': Array.from({length: 25}, (_, i) => ({ name: `TV ${i+1}`, image: '/products/placeholder.png' })),
-    'Flight Booking': Array.from({length: 25}, (_, i) => ({ name: `Flight ${i+1}`, image: '/products/placeholder.png' })),
-    Beauty: Array.from({length: 25}, (_, i) => ({ name: `Beauty ${i+1}`, image: '/products/placeholder.png' })),
-    Grocery: Array.from({length: 25}, (_, i) => ({ name: `Grocery ${i+1}`, image: '/products/placeholder.png' })),
-    Kids: Array.from({length: 25}, (_, i) => ({ name: `Kids ${i+1}`, image: '/products/placeholder.png' })),
-    Sports: Array.from({length: 25}, (_, i) => ({ name: `Sports ${i+1}`, image: '/products/placeholder.png' })),
-  };
+  // Category-wise products (25 placeholders each)
+  const categoryProducts = {};
+  categories.forEach(cat => {
+    categoryProducts[cat.name] = Array.from({ length: 25 }, (_, i) => ({
+      name: `${cat.name} ${i + 1}`,
+      image: '/products/placeholder.png',
+    }));
+  });
 
-  // Deal of the day auto scroll (fixed loop)
+  // Deal of the day auto scroll (infinite loop)
   const dealRef = useRef(null);
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -49,9 +43,7 @@ export default function HomePage() {
     const interval = setInterval(() => {
       if (dealRef.current) {
         let nextIndex = currentIndex + 1;
-        if (nextIndex >= dealOfTheDay.length) {
-          nextIndex = 0; // reset to first deal
-        }
+        if (nextIndex >= dealOfTheDay.length) nextIndex = 0;
         setCurrentIndex(nextIndex);
         dealRef.current.scrollTo({
           left: nextIndex * dealRef.current.offsetWidth,
@@ -59,9 +51,16 @@ export default function HomePage() {
         });
       }
     }, 3000);
-
     return () => clearInterval(interval);
-  }, [currentIndex, dealOfTheDay.length]);
+  }, [currentIndex]);
+
+  // 3 Dots menu toggle
+  const [menuOpen, setMenuOpen] = useState(false);
+  const menuOptions = [
+    'Account', 'Coin zone', 'All categories', 'Filters', 'Language',
+    'Offers', 'My orders', 'My cart', 'My wishlist', 'Notifications',
+    'Help center', 'Return & exchange', 'Wallet', 'Referral & earn'
+  ];
 
   return (
     <div className="homepage">
@@ -79,7 +78,14 @@ export default function HomePage() {
         <div className="top-right">
           <img src="/icons/avatar.png" alt="Profile" className="profile-icon" />
           <button className="topbtn">Login</button>
-          <button className="topbtn">⋮</button>
+          <button className="topbtn" onClick={() => setMenuOpen(!menuOpen)}>⋮</button>
+          {menuOpen && (
+            <div className="dots-menu">
+              {menuOptions.map((opt, idx) => (
+                <div key={idx} className="dots-menu-item">{opt}</div>
+              ))}
+            </div>
+          )}
         </div>
       </div>
 
@@ -130,8 +136,17 @@ export default function HomePage() {
         </section>
       ))}
 
+      {/* Floating Cart Button */}
+      <div className="floating-cart">🛒</div>
+
       {/* Footer */}
-      <footer className="footer">© 2025 DealHunt. All rights reserved.</footer>
+      <footer className="footer">
+        <div>About DealHunt</div>
+        <div>Contact us</div>
+        <div>Help center</div>
+        <div>Mail us</div>
+        <div>Social: Instagram | Facebook | X</div>
+      </footer>
     </div>
   );
 }
