@@ -3,6 +3,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import '../styles/globals.css';
 
 export default function HomePage() {
+  // Categories + icon
   const categories = [
     { name: 'Mobile', icon: 'Mobile.png' },
     { name: 'Laptop', icon: 'Laptop.png' },
@@ -17,6 +18,7 @@ export default function HomePage() {
     { name: 'Sports', icon: 'Sports.png' },
   ];
 
+  // Deal of the day
   const dealOfTheDay = [
     { title: 'Deal 1', image: '/products/deal1.png' },
     { title: 'Deal 2', image: '/products/deal2.png' },
@@ -24,6 +26,7 @@ export default function HomePage() {
     { title: 'Deal 4', image: '/products/deal4.png' },
   ];
 
+  // Category-wise products
   const categoryProducts = {};
   categories.forEach(cat => {
     categoryProducts[cat.name] = Array.from({ length: 25 }, (_, i) => ({
@@ -32,7 +35,7 @@ export default function HomePage() {
     }));
   });
 
-  // Deal of the Day auto-scroll
+  // Deal auto-scroll
   const dealRef = useRef(null);
   const [currentIndex, setCurrentIndex] = useState(0);
   useEffect(() => {
@@ -50,7 +53,7 @@ export default function HomePage() {
     return () => clearInterval(interval);
   }, [currentIndex]);
 
-  // 3 Dots menu toggle
+  // 3 Dots menu
   const [menuOpen, setMenuOpen] = useState(false);
   const menuOptions = [
     'Account', 'Coin zone', 'All categories', 'Filters', 'Language',
@@ -73,16 +76,17 @@ export default function HomePage() {
 
         <div className="top-right">
           <img src="/icons/avatar.png" alt="Profile" className="profile-icon" />
-          <button className="topbtn dots-btn" onClick={() => setMenuOpen(true)}>⋮</button>
-        </div>
-      </div>
+          <button className="topbtn" onClick={() => setMenuOpen(!menuOpen)}>⋮</button>
 
-      {/* Slide-in 3 Dots Menu */}
-      <div className={`dots-panel ${menuOpen ? 'open' : ''}`}>
-        <button className="close-btn" onClick={() => setMenuOpen(false)}>×</button>
-        {menuOptions.map((opt, idx) => (
-          <div key={idx} className="dots-menu-item">{opt}</div>
-        ))}
+          {/* 3 Dots Side Panel */}
+          {menuOpen && (
+            <div className="dots-menu-panel">
+              {menuOptions.map((opt, idx) => (
+                <div key={idx} className="dots-menu-item">{opt}</div>
+              ))}
+            </div>
+          )}
+        </div>
       </div>
 
       {/* Categories Slider */}
