@@ -57,7 +57,7 @@ export default function HomePage() {
   // 3 Dots menu toggle
   const [menuOpen, setMenuOpen] = useState(false);
   const menuOptions = [
-    'Account', 'Coin zone', 'All categories', 'Filters', 'Language',
+    'Login / Signup', 'Account', 'Coin zone', 'All categories', 'Filters', 'Language',
     'Offers', 'My orders', 'My cart', 'My wishlist', 'Notifications',
     'Help center', 'Return & exchange', 'Wallet', 'Referral & earn'
   ];
@@ -76,22 +76,17 @@ export default function HomePage() {
         </div>
 
         <div className="top-right">
-          <img src="/icons/avatar.png" alt="Profile" className="profile-icon" onClick={()=>setMenuOpen(!menuOpen)}/>
-          <button className="topbtn dots-btn" onClick={()=>setMenuOpen(!menuOpen)}>⋮</button>
+          <img src="/icons/avatar.png" alt="Profile" className="profile-icon" />
+          <button className="topbtn" onClick={() => setMenuOpen(!menuOpen)}>⋮</button>
         </div>
       </div>
 
-      {/* 3 Dots Side Panel */}
-      {menuOpen && (
-        <div className="side-menu-overlay" onClick={()=>setMenuOpen(false)}>
-          <div className="side-menu" onClick={e=>e.stopPropagation()}>
-            <h3>Menu</h3>
-            {menuOptions.map((opt, idx)=>(
-              <div key={idx} className="side-menu-item">{opt}</div>
-            ))}
-          </div>
-        </div>
-      )}
+      {/* Side Menu Panel */}
+      <div className={`dots-menu ${menuOpen ? 'open' : ''}`}>
+        {menuOptions.map((opt, idx) => (
+          <div key={idx} className="dots-menu-item">{opt}</div>
+        ))}
+      </div>
 
       {/* Categories Slider */}
       <div className="categories-slider">
