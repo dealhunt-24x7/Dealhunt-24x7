@@ -26,7 +26,7 @@ export default function HomePage() {
     { title: 'Deal 4', image: '/products/deal4.png' },
   ];
 
-  // Category-wise products
+  // Category-wise products (25 placeholders each)
   const categoryProducts = {};
   categories.forEach(cat => {
     categoryProducts[cat.name] = Array.from({ length: 25 }, (_, i) => ({
@@ -35,7 +35,7 @@ export default function HomePage() {
     }));
   });
 
-  // Deal auto-scroll
+  // Deal of the day auto scroll (infinite loop)
   const dealRef = useRef(null);
   const [currentIndex, setCurrentIndex] = useState(0);
   useEffect(() => {
@@ -53,7 +53,7 @@ export default function HomePage() {
     return () => clearInterval(interval);
   }, [currentIndex]);
 
-  // 3 Dots menu
+  // 3 Dots menu toggle
   const [menuOpen, setMenuOpen] = useState(false);
   const menuOptions = [
     'Account', 'Coin zone', 'All categories', 'Filters', 'Language',
@@ -77,8 +77,6 @@ export default function HomePage() {
         <div className="top-right">
           <img src="/icons/avatar.png" alt="Profile" className="profile-icon" />
           <button className="topbtn" onClick={() => setMenuOpen(!menuOpen)}>⋮</button>
-
-          {/* 3 Dots Side Panel */}
           {menuOpen && (
             <div className="dots-menu-panel">
               {menuOptions.map((opt, idx) => (
