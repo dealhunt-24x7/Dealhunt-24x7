@@ -81,7 +81,7 @@ export default function HomePage() {
         </div>
       </div>
 
-      {/* Side Menu Panel */}
+      {/* Side Menu */}
       <div className={`dots-menu ${menuOpen ? 'open' : ''}`}>
         {menuOptions.map((opt, idx) => (
           <div key={idx} className="dots-menu-item">{opt}</div>
