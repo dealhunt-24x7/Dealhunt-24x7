@@ -26,16 +26,22 @@ export default function HomePage() {
     { title: 'Deal 4', image: '/products/deal4.png' },
   ];
 
-  // Category-wise products (25 placeholders each)
-  const categoryProducts = {};
-  categories.forEach(cat => {
-    categoryProducts[cat.name] = Array.from({ length: 25 }, (_, i) => ({
-      name: `${cat.name} ${i + 1}`,
-      image: '/products/placeholder.png',
-    }));
-  });
+  // Category-wise products
+  const categoryProducts = {
+    Mobile: Array.from({length: 25}, (_, i) => ({ name: `Mobile ${i+1}`, image: '/products/placeholder.png' })),
+    Laptop: Array.from({length: 25}, (_, i) => ({ name: `Laptop ${i+1}`, image: '/products/placeholder.png' })),
+    Fashion: Array.from({length: 25}, (_, i) => ({ name: `Fashion ${i+1}`, image: '/products/placeholder.png' })),
+    Electronic: Array.from({length: 25}, (_, i) => ({ name: `Gadget ${i+1}`, image: '/products/placeholder.png' })),
+    'Home & Furniture': Array.from({length: 25}, (_, i) => ({ name: `Item ${i+1}`, image: '/products/placeholder.png' })),
+    'TV & Appliance': Array.from({length: 25}, (_, i) => ({ name: `TV ${i+1}`, image: '/products/placeholder.png' })),
+    'Flight Booking': Array.from({length: 25}, (_, i) => ({ name: `Flight ${i+1}`, image: '/products/placeholder.png' })),
+    Beauty: Array.from({length: 25}, (_, i) => ({ name: `Beauty ${i+1}`, image: '/products/placeholder.png' })),
+    Grocery: Array.from({length: 25}, (_, i) => ({ name: `Grocery ${i+1}`, image: '/products/placeholder.png' })),
+    Kids: Array.from({length: 25}, (_, i) => ({ name: `Kids ${i+1}`, image: '/products/placeholder.png' })),
+    Sports: Array.from({length: 25}, (_, i) => ({ name: `Sports ${i+1}`, image: '/products/placeholder.png' })),
+  };
 
-  // Deal of the day auto scroll (infinite loop)
+  // Deal of the day auto scroll (fixed loop)
   const dealRef = useRef(null);
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -43,7 +49,9 @@ export default function HomePage() {
     const interval = setInterval(() => {
       if (dealRef.current) {
         let nextIndex = currentIndex + 1;
-        if (nextIndex >= dealOfTheDay.length) nextIndex = 0;
+        if (nextIndex >= dealOfTheDay.length) {
+          nextIndex = 0; // reset to first deal
+        }
         setCurrentIndex(nextIndex);
         dealRef.current.scrollTo({
           left: nextIndex * dealRef.current.offsetWidth,
@@ -51,16 +59,9 @@ export default function HomePage() {
         });
       }
     }, 3000);
-    return () => clearInterval(interval);
-  }, [currentIndex]);
 
-  // 3 Dots menu toggle
-  const [menuOpen, setMenuOpen] = useState(false);
-  const menuOptions = [
-    'Account', 'Coin zone', 'All categories', 'Filters', 'Language',
-    'Offers', 'My orders', 'My cart', 'My wishlist', 'Notifications',
-    'Help center', 'Return & exchange', 'Wallet', 'Referral & earn'
-  ];
+    return () => clearInterval(interval);
+  }, [currentIndex, dealOfTheDay.length]);
 
   return (
     <div className="homepage">
@@ -71,82 +72,66 @@ export default function HomePage() {
           <span className="tagline">Find the best deals!</span>
         </div>
 
-        <div className="searchbar">  
-          <input type="text" placeholder="Search products..." />  
-        </div>  
+        <div className="searchbar">
+          <input type="text" placeholder="Search products..." />
+        </div>
 
-        <div className="top-right">  
-          <img src="/icons/avatar.png" alt="Profile" className="profile-icon" />  
-          <button className="topbtn">Login</button>  
-          <button className="topbtn" onClick={() => setMenuOpen(!menuOpen)}>⋮</button>  
-          {menuOpen && (  
-            <div className="dots-menu">  
-              {menuOptions.map((opt, idx) => (  
-                <div key={idx} className="dots-menu-item">{opt}</div>  
-              ))}  
-            </div>  
-          )}  
-        </div>  
-      </div>  
+        <div className="top-right">
+          <img src="/icons/avatar.png" alt="Profile" className="profile-icon" />
+          <button className="topbtn">Login</button>
+          <button className="topbtn">⋮</button>
+        </div>
+      </div>
 
       {/* Categories Slider */}
-      <div className="categories-slider">  
-        {categories.map((cat, index) => (  
-          <div key={index} className="category-item">  
-            <img  
-              src={`/icons/${cat.icon}`}  
-              alt={cat.name}  
-              className="category-icon"  
-              onError={(e)=>e.currentTarget.src='/icons/default-category.png'}  
-            />  
-            <span className="category-text">{cat.name}</span>  
-          </div>  
-        ))}       
-      </div>  
+      <div className="categories-slider">
+        {categories.map((cat, index) => (
+          <div key={index} className="category-item">
+            <img
+              src={`/icons/${cat.icon}`}
+              alt={cat.name}
+              className="category-icon"
+              onError={(e)=>e.currentTarget.src='/icons/default-category.png'}
+            />
+            <span className="category-text">{cat.name}</span>
+          </div>
+        ))}
+      </div>
 
       {/* Deal of the Day */}
-      <section className="deal-slider">  
-        <h2>Deal of the Day</h2>  
-        <div className="deal-items" ref={dealRef}>  
-          {dealOfTheDay.map((deal, idx)=>(  
-            <div key={idx} className="deal-item">  
-              <img src={deal.image} alt={deal.title} className="deal-image" />  
-              <div className="deal-info">  
-                <p className="deal-title">{deal.title}</p>  
-                <button className="compare-btn">Compare</button>  
-              </div>  
-            </div>  
-          ))}  
-        </div>  
-      </section>  
+      <section className="deal-slider">
+        <h2>Deal of the Day</h2>
+        <div className="deal-items" ref={dealRef}>
+          {dealOfTheDay.map((deal, idx)=>(
+            <div key={idx} className="deal-item">
+              <img src={deal.image} alt={deal.title} className="deal-image" />
+              <div className="deal-info">
+                <p className="deal-title">{deal.title}</p>
+                <button className="compare-btn">Compare</button>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
 
       {/* Category-wise products */}
-      {Object.keys(categoryProducts).map((cat, index)=>(  
-        <section key={index} className="category-section">  
-          <h3>{cat}</h3>  
-          <div className="category-products-row">  
-            {categoryProducts[cat].map((prod, idx)=>(  
-              <div key={idx} className="product-card">  
-                <img src={prod.image} alt={prod.name} className="product-image"/>  
-                <p className="product-name">{prod.name}</p>  
-                <button className="compare-btn">Compare</button>  
-              </div>  
-            ))}  
-          </div>  
-        </section>  
-      ))}  
-
-      {/* Floating Cart Button */}
-      <div className="floating-cart">🛒</div>  
+      {Object.keys(categoryProducts).map((cat, index)=>(
+        <section key={index} className="category-section">
+          <h3>{cat}</h3>
+          <div className="category-products-row">
+            {categoryProducts[cat].map((prod, idx)=>(
+              <div key={idx} className="product-card">
+                <img src={prod.image} alt={prod.name} className="product-image"/>
+                <p className="product-name">{prod.name}</p>
+                <button className="compare-btn">Compare</button>
+              </div>
+            ))}
+          </div>
+        </section>
+      ))}
 
       {/* Footer */}
-      <footer className="footer">  
-        <div>About DealHunt</div>  
-        <div>Contact us</div>  
-        <div>Help center</div>  
-        <div>Mail us</div>  
-        <div>Social: Instagram | Facebook | X</div>  
-      </footer>  
+      <footer className="footer">© 2025 DealHunt. All rights reserved.</footer>
     </div>
   );
 }
