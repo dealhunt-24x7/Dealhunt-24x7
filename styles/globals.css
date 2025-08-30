@@ -10,45 +10,20 @@ body { font-family: Arial,sans-serif; background:#f7f7f8; color:#202225; positio
 .brand-name { font-size:1.3rem; font-weight:800; color:#ffd700; }
 .tagline { font-size:0.85rem; color:#fff; font-style:italic; }
 
+/* Search */
 .searchbar { flex:1; text-align:center; }
 .searchbar input {
   width:min(90%, 520px); padding:.5rem .7rem; font-size:1rem; border-radius:8px; border:none; outline:none;
 }
 
+/* Top-right */
 .top-right { display:flex; align-items:center; gap:.5rem; position:relative; }
 .profile-icon { width:32px; height:32px; border-radius:50%; object-fit:cover; cursor:pointer; margin-right:4px; }
 .topbtn { background:transparent; border:none; color:#fff; font-size:0.9rem; cursor:pointer; }
 
-/* Hamburger 3-lines */
-.hamburger {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  width:22px;
-  height:18px;
-  cursor: pointer;
-}
-.hamburger span {
-  display:block;
-  height:2px;
-  width:100%;
-  background:#fff;
-  border-radius:1px;
-}
-
-/* 3-line menu overlay */
-.dots-menu {
-  position:fixed; top:0; right:0; width:240px; height:100%; background:#fff;
-  box-shadow:-2px 0 12px rgba(0,0,0,.2); padding:1rem; display:flex; flex-direction:column;
-  gap:.5rem; z-index:200; overflow-y:auto;
-  transform:translateX(100%); transition:transform .3s ease;
-}
-.dots-menu.open { transform:translateX(0); }
-.dots-menu-item {
-  padding:.6rem .8rem; cursor:pointer; border-bottom:1px solid #ddd; font-weight:600;
-}
-.dots-menu-item:last-child { border-bottom:none; }
-.dots-menu-item:hover { background:#f0f0f0; }
+/* Hamburger */
+.hamburger { display:flex; flex-direction:column; justify-content:space-between; width:22px; height:18px; cursor:pointer; }
+.hamburger span { display:block; height:2px; width:100%; background:#fff; border-radius:1px; }
 
 /* Categories */
 .categories-slider { display:flex; overflow-x:auto; gap:1rem; padding:.75rem 1rem; scroll-snap-type:x proximity; }
@@ -82,7 +57,7 @@ body { font-family: Arial,sans-serif; background:#f7f7f8; color:#202225; positio
 /* Footer */
 .footer { background:#111827; color:#e5e7eb; text-align:center; padding:1rem 0; margin-top:2rem; }
 
-/* Responsive tweaks */
+/* Responsive */
 @media(max-width:767px){
   .brand-name { font-size:1.1rem; }
   .tagline { font-size:0.75rem; }
@@ -92,5 +67,4 @@ body { font-family: Arial,sans-serif; background:#f7f7f8; color:#202225; positio
   .category-item { min-width:90px; }
   .product-card { min-width:110px; max-width:120px; }
   .deal-item { height:280px; }
-  .dots-menu { width:200px; }
 }
