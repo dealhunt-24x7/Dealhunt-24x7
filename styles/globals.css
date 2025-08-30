@@ -16,8 +16,15 @@ body { font-family: Arial,sans-serif; background:#f7f7f8; color:#202225; positio
 }
 
 .top-right { display:flex; align-items:center; gap:.5rem; position:relative; }
-.profile-icon { width:32px; height:32px; border-radius:50%; object-fit:cover; cursor:pointer; }
+.profile-icon { width:32px; height:32px; border-radius:50%; object-fit:cover; cursor:pointer; margin-right:4px; } /* gap fix */
 .topbtn { background:transparent; border:none; color:#fff; font-size:0.9rem; cursor:pointer; }
+
+/* Dots bold + clear */
+.menu-dots {
+  font-weight: 700;
+  font-size: 22px;
+  line-height: 1;
+}
 
 /* 3-dots side menu overlay */
 .dots-menu {
@@ -83,7 +90,7 @@ body { font-family: Arial,sans-serif; background:#f7f7f8; color:#202225; positio
   .brand-name { font-size:1.1rem; }
   .tagline { font-size:0.75rem; }
   .searchbar input { font-size:0.85rem; }
-  .profile-icon { width:28px; height:28px; }
+  .profile-icon { width:28px; height:28px; margin-right:3px; }
   .topbtn { font-size:0.8rem; }
   .category-item { min-width:90px; }
   .product-card { min-width:110px; max-width:120px; }
