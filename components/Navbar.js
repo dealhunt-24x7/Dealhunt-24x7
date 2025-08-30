@@ -1,51 +1,43 @@
 "use client";
-
-import { useState, useEffect, useRef } from "react";
-import Sidebar from "./Sidebar";
+import { useState } from "react";
 
 export default function Navbar() {
-  const [sidebarOpen, setSidebarOpen] = useState(false);
-  const menuRef = useRef(null);
-
-  // Close sidebar if clicked outside
-  useEffect(() => {
-    function handleClickOutside(event) {
-      if (menuRef.current && !menuRef.current.contains(event.target)) {
-        setSidebarOpen(false);
-      }
-    }
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [menuRef]);
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <nav className="top-navbar">
-      {/* Left - Hamburger for mobile */}
-      <button
-        className={`hamburger ${sidebarOpen ? "open" : ""}`}
-        onClick={() => setSidebarOpen(!sidebarOpen)}
-      >
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
+    <>
+      <nav className="navbar">
+        <div className="logo">RakshakAI</div>
 
-      {/* Center - Brand */}
-      <h1 className="brand-name">DealHunt</h1>
+        {/* Desktop Links */}
+        <div className="nav-links">
+          <a href="#">Home</a>
+          <a href="#">Features</a>
+          <a href="#">Support</a>
+          <a href="#">Donate</a>
+        </div>
 
-      {/* Right - Nav Links (desktop) */}
-      <div className="hidden md:flex space-x-6">
-        <a href="/">Home</a>
-        <a href="/products">Products</a>
-        <a href="/about">About</a>
-      </div>
+        {/* Hamburger (Mobile) */}
+        <div
+          className={`hamburger ${isOpen ? "open" : ""}`}
+          onClick={() => setIsOpen(!isOpen)}
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </nav>
 
       {/* Sidebar */}
-      <div ref={menuRef}>
-        <Sidebar open={sidebarOpen} setOpen={setSidebarOpen} />
+      <div className={`sidebar ${isOpen ? "open" : ""}`}>
+        <a href="#" onClick={() => setIsOpen(false)}>Home</a>
+        <a href="#" onClick={() => setIsOpen(false)}>Features</a>
+        <a href="#" onClick={() => setIsOpen(false)}>Support</a>
+        <a href="#" onClick={() => setIsOpen(false)}>Donate</a>
       </div>
-    </nav>
+
+      {/* Overlay (click → close menu) */}
+      {isOpen && <div className="overlay" onClick={() => setIsOpen(false)}></div>}
+    </>
   );
 }
