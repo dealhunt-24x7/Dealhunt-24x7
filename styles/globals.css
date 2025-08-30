@@ -1,13 +1,13 @@
 /* Reset + base */
 * { box-sizing: border-box; margin:0; padding:0; }
-body { font-family: Arial,sans-serif; background:#f7f7f8; color:#202225; }
+body { font-family: Arial,sans-serif; background:#f7f7f8; color:#202225; position:relative; }
 
 /* Top Navbar */
 .top-navbar {
   display: flex; justify-content: space-between; align-items: center; gap:.75rem;
-  padding:.6rem 1rem; background-color:#0d6efd; color:#fff; flex-wrap: wrap;
+  padding:.6rem 1rem; background-color:#0d6efd; color:#fff; flex-wrap: wrap; position:relative;
 }
-.brand-name { font-size:1.3rem; font-weight:800; color:#ffd700; } /* colorful */
+.brand-name { font-size:1.3rem; font-weight:800; color:#ffd700; }
 .tagline { font-size:0.85rem; color:#fff; font-style:italic; }
 
 .searchbar { flex:1; text-align:center; }
@@ -15,9 +15,23 @@ body { font-family: Arial,sans-serif; background:#f7f7f8; color:#202225; }
   width:min(90%, 520px); padding:.5rem .7rem; font-size:1rem; border-radius:8px; border:none; outline:none;
 }
 
-.top-right { display:flex; align-items:center; gap:.5rem; }
-.profile-icon { width:32px; height:32px; border-radius:50%; object-fit:cover; }
+.top-right { display:flex; align-items:center; gap:.5rem; position:relative; }
+.profile-icon { width:32px; height:32px; border-radius:50%; object-fit:cover; cursor:pointer; }
 .topbtn { background:transparent; border:none; color:#fff; font-size:0.9rem; cursor:pointer; }
+
+/* 3-dots side menu overlay */
+.dots-menu {
+  position:fixed; top:0; right:0; width:240px; height:100%; background:#fff;
+  box-shadow:-2px 0 12px rgba(0,0,0,.2); padding:1rem; display:flex; flex-direction:column;
+  gap:.5rem; z-index:200; overflow-y:auto;
+  transform:translateX(100%); transition:transform .3s ease;
+}
+.dots-menu.open { transform:translateX(0); }
+.dots-menu-item {
+  padding:.6rem .8rem; cursor:pointer; border-bottom:1px solid #ddd; font-weight:600;
+}
+.dots-menu-item:last-child { border-bottom:none; }
+.dots-menu-item:hover { background:#f0f0f0; }
 
 /* Categories */
 .categories-slider {
@@ -35,9 +49,7 @@ body { font-family: Arial,sans-serif; background:#f7f7f8; color:#202225; }
 /* Deal of the Day */
 .deal-slider { padding:1rem; }
 .deal-slider h2 { margin:.25rem 0 .75rem; }
-.deal-items {
-  display:flex; overflow-x:hidden; scroll-snap-type:x mandatory; gap:1rem;
-}
+.deal-items { display:flex; overflow-x:hidden; scroll-snap-type:x mandatory; gap:1rem; }
 .deal-item { min-width:100%; max-width:100%; height:320px; background:#fff; border-radius:14px;
   flex:0 0 auto; display:flex; flex-direction:column; overflow:hidden; scroll-snap-align:center;
   box-shadow:0 2px 10px rgba(0,0,0,.08);
@@ -56,6 +68,13 @@ body { font-family: Arial,sans-serif; background:#f7f7f8; color:#202225; }
 .product-image { width:100%; height:110px; object-fit:contain; background:#f3f4f6; border-radius:8px; }
 .product-name { font-size:.9rem; font-weight:600; text-align:center; min-height:36px; }
 
+/* Floating Cart Button */
+.floating-cart {
+  position:fixed; bottom:20px; right:20px; width:50px; height:50px;
+  background:#0d6efd; color:#fff; border-radius:50%; display:flex; justify-content:center; align-items:center;
+  font-size:1.4rem; cursor:pointer; box-shadow:0 2px 12px rgba(0,0,0,.3); z-index:150;
+}
+
 /* Footer */
 .footer { background:#111827; color:#e5e7eb; text-align:center; padding:1rem 0; margin-top:2rem; }
 
@@ -69,4 +88,5 @@ body { font-family: Arial,sans-serif; background:#f7f7f8; color:#202225; }
   .category-item { min-width:90px; }
   .product-card { min-width:110px; max-width:120px; }
   .deal-item { height:280px; }
+  .dots-menu { width:200px; }
 }
