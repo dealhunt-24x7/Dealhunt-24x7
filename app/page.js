@@ -1,5 +1,5 @@
 'use client';
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import '../styles/globals.css';
 
 export default function HomePage() {
@@ -41,16 +41,27 @@ export default function HomePage() {
     Sports: Array.from({length: 25}, (_, i) => ({ name: `Sports ${i+1}`, image: '/products/placeholder.png' })),
   };
 
-  // Deal of the day auto scroll
+  // Deal of the day auto scroll (fixed loop)
   const dealRef = useRef(null);
+  const [currentIndex, setCurrentIndex] = useState(0);
+
   useEffect(() => {
     const interval = setInterval(() => {
       if (dealRef.current) {
-        dealRef.current.scrollBy({ left: dealRef.current.offsetWidth, behavior: 'smooth' });
+        let nextIndex = currentIndex + 1;
+        if (nextIndex >= dealOfTheDay.length) {
+          nextIndex = 0; // reset to first deal
+        }
+        setCurrentIndex(nextIndex);
+        dealRef.current.scrollTo({
+          left: nextIndex * dealRef.current.offsetWidth,
+          behavior: 'smooth',
+        });
       }
     }, 3000);
+
     return () => clearInterval(interval);
-  }, []);
+  }, [currentIndex, dealOfTheDay.length]);
 
   return (
     <div className="homepage">
