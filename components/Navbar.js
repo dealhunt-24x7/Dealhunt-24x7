@@ -24,7 +24,7 @@ export default function Navbar() {
     <nav className="top-navbar">
       {/* Left - Hamburger for mobile */}
       <button
-        className="hamburger"
+        className={`hamburger ${sidebarOpen ? "open" : ""}`}
         onClick={() => setSidebarOpen(!sidebarOpen)}
       >
         <span></span>
@@ -42,7 +42,7 @@ export default function Navbar() {
         <a href="/about">About</a>
       </div>
 
-      {/* Sidebar / 3-line menu */}
+      {/* Sidebar */}
       <div ref={menuRef}>
         <Sidebar open={sidebarOpen} setOpen={setSidebarOpen} />
       </div>
