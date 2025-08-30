@@ -1,4 +1,5 @@
 "use client";
+
 import { useState, useEffect, useRef } from "react";
 import Sidebar from "./Sidebar";
 
@@ -13,6 +14,7 @@ export default function Navbar() {
     "Help center", "Return & exchange", "Wallet", "Referral & earn"
   ];
 
+  // Close menu on click outside
   useEffect(() => {
     function handleClickOutside(event) {
       if (menuRef.current && !menuRef.current.contains(event.target)) {
@@ -36,25 +38,25 @@ export default function Navbar() {
       {/* Center - Brand */}
       <h1 className="text-2xl font-bold">DealHunt</h1>
 
-      {/* Right - Profile + Hamburger */}
-      <div className="flex items-center gap-3 relative">
+      {/* Right - Profile + 3-dot menu */}
+      <div className="flex items-center gap-4 relative">
         <img
           src="/icons/avatar.png"
           alt="Profile"
           className="w-8 h-8 rounded-full object-cover cursor-pointer"
           onClick={() => setMenuOpen(!menuOpen)}
         />
+        <button
+          className="dots-btn text-xl font-bold cursor-pointer"
+          onClick={() => setMenuOpen(!menuOpen)}
+        >
+          ⋮
+        </button>
 
-        <div className="hamburger" onClick={() => setMenuOpen(!menuOpen)}>
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>
-
-        {/* Side Menu */}
+        {/* 3-dot Side Menu */}
         {menuOpen && (
           <div className="fixed inset-0 z-50 flex">
-            <div className="flex-1" /> {/* Empty space */}
+            <div className="flex-1" /> {/* Empty space to click outside */}
             <div
               ref={menuRef}
               className="w-60 bg-white shadow-lg p-4 flex flex-col gap-2 overflow-y-auto"
