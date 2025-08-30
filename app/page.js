@@ -26,7 +26,7 @@ export default function HomePage() {
     { title: 'Deal 4', image: '/products/deal4.png' },
   ];
 
-  // Category-wise products (25 placeholders each)
+  // Category-wise products
   const categoryProducts = {};
   categories.forEach(cat => {
     categoryProducts[cat.name] = Array.from({ length: 25 }, (_, i) => ({
@@ -38,6 +38,7 @@ export default function HomePage() {
   // Deal of the day auto scroll (infinite loop)
   const dealRef = useRef(null);
   const [currentIndex, setCurrentIndex] = useState(0);
+
   useEffect(() => {
     const interval = setInterval(() => {
       if (dealRef.current) {
@@ -56,9 +57,10 @@ export default function HomePage() {
   // 3 Dots menu toggle
   const [menuOpen, setMenuOpen] = useState(false);
   const menuOptions = [
-    'Account', 'Coin zone', 'All categories', 'Filters', 'Language',
-    'Offers', 'My orders', 'My cart', 'My wishlist', 'Notifications',
-    'Help center', 'Return & exchange', 'Wallet', 'Referral & earn'
+    'Account', 'Coin zone', 'All categories', 'Filters',
+    'Language', 'Offers', 'My orders', 'My cart',
+    'My wishlist', 'Notifications', 'Help center',
+    'Return & exchange', 'Wallet', 'Referral & earn'
   ];
 
   return (
@@ -77,6 +79,8 @@ export default function HomePage() {
         <div className="top-right">
           <img src="/icons/avatar.png" alt="Profile" className="profile-icon" />
           <button className="topbtn" onClick={() => setMenuOpen(!menuOpen)}>⋮</button>
+
+          {/* 3 Dots Side Panel */}
           {menuOpen && (
             <div className="dots-menu-panel">
               {menuOptions.map((opt, idx) => (
