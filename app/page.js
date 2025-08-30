@@ -76,18 +76,22 @@ export default function HomePage() {
         </div>
 
         <div className="top-right">
-          <img src="/icons/avatar.png" alt="Profile" className="profile-icon" />
-          <button className="topbtn">Login</button>
-          <button className="topbtn" onClick={() => setMenuOpen(!menuOpen)}>⋮</button>
-          {menuOpen && (
-            <div className="dots-menu">
-              {menuOptions.map((opt, idx) => (
-                <div key={idx} className="dots-menu-item">{opt}</div>
-              ))}
-            </div>
-          )}
+          <img src="/icons/avatar.png" alt="Profile" className="profile-icon" onClick={()=>setMenuOpen(!menuOpen)}/>
+          <button className="topbtn dots-btn" onClick={()=>setMenuOpen(!menuOpen)}>⋮</button>
         </div>
       </div>
+
+      {/* 3 Dots Side Panel */}
+      {menuOpen && (
+        <div className="side-menu-overlay" onClick={()=>setMenuOpen(false)}>
+          <div className="side-menu" onClick={e=>e.stopPropagation()}>
+            <h3>Menu</h3>
+            {menuOptions.map((opt, idx)=>(
+              <div key={idx} className="side-menu-item">{opt}</div>
+            ))}
+          </div>
+        </div>
+      )}
 
       {/* Categories Slider */}
       <div className="categories-slider">
