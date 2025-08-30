@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import '../styles/globals.css';
 
 export default function HomePage() {
-  // Categories
+  // Categories + icon
   const categories = [
     { name: 'Mobile', icon: 'Mobile.png' },
     { name: 'Laptop', icon: 'Laptop.png' },
@@ -26,7 +26,7 @@ export default function HomePage() {
     { title: 'Deal 4', image: '/products/deal4.png' },
   ];
 
-  // Category-wise products
+  // Category-wise products (25 placeholders each)
   const categoryProducts = {};
   categories.forEach(cat => {
     categoryProducts[cat.name] = Array.from({ length: 25 }, (_, i) => ({
@@ -35,9 +35,10 @@ export default function HomePage() {
     }));
   });
 
-  // Auto-scroll Deal
+  // Deal of the day auto scroll (infinite loop)
   const dealRef = useRef(null);
   const [currentIndex, setCurrentIndex] = useState(0);
+
   useEffect(() => {
     const interval = setInterval(() => {
       if (dealRef.current) {
@@ -53,7 +54,7 @@ export default function HomePage() {
     return () => clearInterval(interval);
   }, [currentIndex]);
 
-  // 3-dots menu toggle
+  // 3 Dots menu toggle
   const [menuOpen, setMenuOpen] = useState(false);
   const menuOptions = [
     'Account', 'Coin zone', 'All categories', 'Filters', 'Language',
@@ -66,7 +67,7 @@ export default function HomePage() {
       {/* Top Navbar */}
       <div className="top-navbar">
         <div className="brand">
-          <span className="brand-name">DealHunt</span><br />
+          <span className="brand-name">DealHunt</span><br/>
           <span className="tagline">Find the best deals!</span>
         </div>
 
@@ -75,28 +76,22 @@ export default function HomePage() {
         </div>
 
         <div className="top-right">
-          <img
-            src="/icons/avatar.png"
-            alt="Profile"
-            className="profile-icon"
-            onClick={() => setMenuOpen(!menuOpen)}
-          />
-          <button
-            className="topbtn dots-btn"
-            onClick={() => setMenuOpen(!menuOpen)}
-          >
-            ⋮
-          </button>
+          <img src="/icons/avatar.png" alt="Profile" className="profile-icon" onClick={()=>setMenuOpen(!menuOpen)}/>
+          <button className="topbtn dots-btn" onClick={()=>setMenuOpen(!menuOpen)}>⋮</button>
         </div>
       </div>
 
       {/* 3 Dots Side Panel */}
-      <div className={`dots-menu ${menuOpen ? 'open' : ''}`}>
-        <h3>Menu</h3>
-        {menuOptions.map((opt, idx) => (
-          <div key={idx} className="dots-menu-item">{opt}</div>
-        ))}
-      </div>
+      {menuOpen && (
+        <div className="side-menu-overlay" onClick={()=>setMenuOpen(false)}>
+          <div className="side-menu" onClick={e=>e.stopPropagation()}>
+            <h3>Menu</h3>
+            {menuOptions.map((opt, idx)=>(
+              <div key={idx} className="side-menu-item">{opt}</div>
+            ))}
+          </div>
+        </div>
+      )}
 
       {/* Categories Slider */}
       <div className="categories-slider">
@@ -106,7 +101,7 @@ export default function HomePage() {
               src={`/icons/${cat.icon}`}
               alt={cat.name}
               className="category-icon"
-              onError={(e) => e.currentTarget.src = '/icons/default-category.png'}
+              onError={(e)=>e.currentTarget.src='/icons/default-category.png'}
             />
             <span className="category-text">{cat.name}</span>
           </div>
@@ -117,7 +112,7 @@ export default function HomePage() {
       <section className="deal-slider">
         <h2>Deal of the Day</h2>
         <div className="deal-items" ref={dealRef}>
-          {dealOfTheDay.map((deal, idx) => (
+          {dealOfTheDay.map((deal, idx)=>(
             <div key={idx} className="deal-item">
               <img src={deal.image} alt={deal.title} className="deal-image" />
               <div className="deal-info">
@@ -130,13 +125,13 @@ export default function HomePage() {
       </section>
 
       {/* Category-wise products */}
-      {Object.keys(categoryProducts).map((cat, index) => (
+      {Object.keys(categoryProducts).map((cat, index)=>(
         <section key={index} className="category-section">
           <h3>{cat}</h3>
           <div className="category-products-row">
-            {categoryProducts[cat].map((prod, idx) => (
+            {categoryProducts[cat].map((prod, idx)=>(
               <div key={idx} className="product-card">
-                <img src={prod.image} alt={prod.name} className="product-image" />
+                <img src={prod.image} alt={prod.name} className="product-image"/>
                 <p className="product-name">{prod.name}</p>
                 <button className="compare-btn">Compare</button>
               </div>
@@ -145,7 +140,7 @@ export default function HomePage() {
         </section>
       ))}
 
-      {/* Floating Cart */}
+      {/* Floating Cart Button */}
       <div className="floating-cart">🛒</div>
 
       {/* Footer */}
