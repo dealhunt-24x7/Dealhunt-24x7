@@ -8,7 +8,7 @@ body { font-family: Arial,sans-serif; background:#f7f7f8; color:#202225; positio
   padding:.6rem 1rem; background-color:#0d6efd; color:#fff; flex-wrap: wrap; position:relative;
 }
 .brand-name { font-size:1.3rem; font-weight:800; color:#ffd700; }
-.tagline { font-size:0.85rem; color:#fff; font-style:italic; }
+.tagline { font-size:.85rem; color:#fff; font-style:italic; }
 
 .searchbar { flex:1; text-align:center; }
 .searchbar input {
@@ -16,29 +16,17 @@ body { font-family: Arial,sans-serif; background:#f7f7f8; color:#202225; positio
 }
 
 .top-right { display:flex; align-items:center; gap:.5rem; position:relative; }
-.profile-icon { width:32px; height:32px; border-radius:50%; object-fit:cover; cursor:pointer; margin-right:4px; } /* gap fix */
-.topbtn { background:transparent; border:none; color:#fff; font-size:0.9rem; cursor:pointer; }
+.profile-icon { width:32px; height:32px; border-radius:50%; object-fit:cover; cursor:pointer; margin-right:4px; }
 
-/* Dots bold + clear */
-.menu-dots {
-  font-weight: 700;
-  font-size: 22px;
-  line-height: 1;
+/* 3-line Hamburger style (mobile) */
+.hamburger span {
+  display: block;
+  height: 2px;
+  width: 20px;
+  background: #fff;
+  margin-bottom: 4px;
+  border-radius: 1px;
 }
-
-/* 3-dots side menu overlay */
-.dots-menu {
-  position:fixed; top:0; right:0; width:240px; height:100%; background:#fff;
-  box-shadow:-2px 0 12px rgba(0,0,0,.2); padding:1rem; display:flex; flex-direction:column;
-  gap:.5rem; z-index:200; overflow-y:auto;
-  transform:translateX(100%); transition:transform .3s ease;
-}
-.dots-menu.open { transform:translateX(0); }
-.dots-menu-item {
-  padding:.6rem .8rem; cursor:pointer; border-bottom:1px solid #ddd; font-weight:600;
-}
-.dots-menu-item:last-child { border-bottom:none; }
-.dots-menu-item:hover { background:#f0f0f0; }
 
 /* Categories */
 .categories-slider {
@@ -90,7 +78,7 @@ body { font-family: Arial,sans-serif; background:#f7f7f8; color:#202225; positio
   .brand-name { font-size:1.1rem; }
   .tagline { font-size:0.75rem; }
   .searchbar input { font-size:0.85rem; }
-  .profile-icon { width:28px; height:28px; margin-right:3px; }
+  .profile-icon { width:28px; height:28px; }
   .topbtn { font-size:0.8rem; }
   .category-item { min-width:90px; }
   .product-card { min-width:110px; max-width:120px; }
