@@ -16,17 +16,20 @@ body { font-family: Arial,sans-serif; background:#f7f7f8; color:#202225; positio
 }
 
 .top-right { display:flex; align-items:center; gap:.5rem; position:relative; }
-.profile-icon { width:32px; height:32px; border-radius:50%; object-fit:cover; cursor:pointer; margin-right:4px; } /* gap fix */
+.profile-icon { width:32px; height:32px; border-radius:50%; object-fit:cover; cursor:pointer; margin-right:4px; }
 .topbtn { background:transparent; border:none; color:#fff; font-size:0.9rem; cursor:pointer; }
 
-/* Dots bold + clear */
-.menu-dots {
-  font-weight: 700;
-  font-size: 22px;
-  line-height: 1;
+/* Hamburger 3-lines */
+.hamburger span {
+  display:block;
+  height:2px;
+  width:20px;
+  background:#fff;
+  margin-bottom:4px;
+  border-radius:1px;
 }
 
-/* 3-dots side menu overlay */
+/* 3-line menu overlay */
 .dots-menu {
   position:fixed; top:0; right:0; width:240px; height:100%; background:#fff;
   box-shadow:-2px 0 12px rgba(0,0,0,.2); padding:1rem; display:flex; flex-direction:column;
@@ -41,14 +44,8 @@ body { font-family: Arial,sans-serif; background:#f7f7f8; color:#202225; positio
 .dots-menu-item:hover { background:#f0f0f0; }
 
 /* Categories */
-.categories-slider {
-  display:flex; overflow-x:auto; gap:1rem; padding:.75rem 1rem; scroll-snap-type:x proximity;
-}
-.category-item {
-  display:flex; flex-direction:column; align-items:center; justify-content:center;
-  min-width:100px; background:#fff; border-radius:12px; padding:.5rem; box-shadow:0 1px 3px rgba(0,0,0,.08);
-  cursor:pointer; transition:transform .2s ease, box-shadow .2s ease; scroll-snap-align:start;
-}
+.categories-slider { display:flex; overflow-x:auto; gap:1rem; padding:.75rem 1rem; scroll-snap-type:x proximity; }
+.category-item { display:flex; flex-direction:column; align-items:center; justify-content:center; min-width:100px; background:#fff; border-radius:12px; padding:.5rem; box-shadow:0 1px 3px rgba(0,0,0,.08); cursor:pointer; transition:transform .2s ease, box-shadow .2s ease; scroll-snap-align:start; }
 .category-item:hover { transform:translateY(-2px); box-shadow:0 4px 12px rgba(0,0,0,.12); }
 .category-icon { width:44px; height:44px; object-fit:contain; margin-bottom:.3rem; }
 .category-text { font-size:.9rem; font-weight:600; text-align:center; }
@@ -57,10 +54,7 @@ body { font-family: Arial,sans-serif; background:#f7f7f8; color:#202225; positio
 .deal-slider { padding:1rem; }
 .deal-slider h2 { margin:.25rem 0 .75rem; }
 .deal-items { display:flex; overflow-x:hidden; scroll-snap-type:x mandatory; gap:1rem; }
-.deal-item { min-width:100%; max-width:100%; height:320px; background:#fff; border-radius:14px;
-  flex:0 0 auto; display:flex; flex-direction:column; overflow:hidden; scroll-snap-align:center;
-  box-shadow:0 2px 10px rgba(0,0,0,.08);
-}
+.deal-item { min-width:100%; max-width:100%; height:320px; background:#fff; border-radius:14px; flex:0 0 auto; display:flex; flex-direction:column; overflow:hidden; scroll-snap-align:center; box-shadow:0 2px 10px rgba(0,0,0,.08); }
 .deal-image { width:100%; height:70%; object-fit:contain; background:#f3f4f6; }
 .deal-info { padding:.6rem .8rem; display:flex; justify-content:space-between; align-items:center; }
 .deal-title { font-weight:700; }
@@ -76,11 +70,7 @@ body { font-family: Arial,sans-serif; background:#f7f7f8; color:#202225; positio
 .product-name { font-size:.9rem; font-weight:600; text-align:center; min-height:36px; }
 
 /* Floating Cart Button */
-.floating-cart {
-  position:fixed; bottom:20px; right:20px; width:50px; height:50px;
-  background:#0d6efd; color:#fff; border-radius:50%; display:flex; justify-content:center; align-items:center;
-  font-size:1.4rem; cursor:pointer; box-shadow:0 2px 12px rgba(0,0,0,.3); z-index:150;
-}
+.floating-cart { position:fixed; bottom:20px; right:20px; width:50px; height:50px; background:#0d6efd; color:#fff; border-radius:50%; display:flex; justify-content:center; align-items:center; font-size:1.4rem; cursor:pointer; box-shadow:0 2px 12px rgba(0,0,0,.3); z-index:150; }
 
 /* Footer */
 .footer { background:#111827; color:#e5e7eb; text-align:center; padding:1rem 0; margin-top:2rem; }
